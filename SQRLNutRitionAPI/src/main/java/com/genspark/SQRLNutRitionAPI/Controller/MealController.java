@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "") // Put React server address here
+@CrossOrigin(origins = "http://localhost:3000") // Put React server address here
 @RestController
 @RequestMapping("meal/")
 public class MealController {
