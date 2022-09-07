@@ -20,7 +20,9 @@ public class Squirrel {
     private List<Meal> meals;
 
     private String name;
+    @Column(nullable = true)
     private double weight;
+    @Column(nullable = true)
     private boolean isMale;
 
     private LocalDateTime createdOn;
