@@ -24,6 +24,11 @@ public class User {
         this.createdOn = LocalDateTime.now();
     }
 
+    public User(String username) {
+        this.username = username;
+        this.createdOn = LocalDateTime.now();
+    }
+
     public User() {
     }
 
