@@ -8,12 +8,13 @@ import java.util.List;
 public interface SquirrelService {
 
     // CREATE / UPDATE
-    Squirrel createSquirrel(Squirrel sqrl);
+    User createSquirrel(Squirrel sqrl, String username);
     Squirrel updateSquirrel(Squirrel sqrl);
 
     // GET / READ
-    List<Squirrel> getSquirrelsByUser(User user);
+    List<Squirrel> getSquirrelsByUsername(String username);
     Squirrel getSquirrelById(int id);
+    List<Squirrel> getAllSquirrels();
 
     // DELETE
     String deleteSquirrelsByUser(User user); // Deletes all squirrels for given user
