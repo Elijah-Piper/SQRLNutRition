@@ -8,7 +8,7 @@ import java.util.List;
 public interface MealService {
 
     // CREATE / UPDATE
-    Meal createMeal(Meal meal);
+    Squirrel createMeal(Meal meal, int squirrelId);
     Meal updateMeal(Meal meal);
 
     // GET / READ

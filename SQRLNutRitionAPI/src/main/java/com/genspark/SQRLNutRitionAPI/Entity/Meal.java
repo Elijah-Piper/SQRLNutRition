@@ -1,19 +1,19 @@
 package com.genspark.SQRLNutRitionAPI.Entity;
 
+import net.bytebuddy.asm.Advice;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 public class Meal {
 
     @Id
-    @Column(name = "mealId")
+    @Column(name = "meal_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int mealId;
-
-    @ManyToOne
-    @JoinColumn(name = "squirrelId")
-    private Squirrel squirrel;
 
     private LocalDateTime createdOn;
     private LocalDateTime eatenOn;
@@ -25,19 +25,8 @@ public class Meal {
     private int carbs;
     private int fat;
 
-    public Meal(int mealId, Squirrel squirrel, LocalDateTime eatenOn, String name, int calories, int protein, int carbs, int fat) {
-        this.mealId = mealId;
-        this.squirrel = squirrel;
-        this.createdOn = LocalDateTime.now();
-        this.eatenOn = eatenOn;
-        this.name = name;
-        this.calories = calories;
-        this.protein = protein;
-        this.carbs = carbs;
-        this.fat = fat;
-    }
-
     public Meal() {
+        this.createdOn = LocalDateTime.now();
     }
 
     public int getMealId() {
@@ -46,14 +35,6 @@ public class Meal {
 
     public void setMealId(int mealId) {
         this.mealId = mealId;
-    }
-
-    public Squirrel getSquirrel() {
-        return squirrel;
-    }
-
-    public void setSquirrel(Squirrel squirrel) {
-        this.squirrel = squirrel;
     }
 
     public LocalDateTime getCreatedOn() {
@@ -116,7 +97,7 @@ public class Meal {
     public String toString() {
         return "Meal{" +
                 "mealId=" + mealId +
-                ", squirrel=" + squirrel +
+//                ", squirrel=" + squirrel +
                 ", createdOn=" + createdOn +
                 ", eatenOn=" + eatenOn +
                 ", name='" + name + '\'' +
