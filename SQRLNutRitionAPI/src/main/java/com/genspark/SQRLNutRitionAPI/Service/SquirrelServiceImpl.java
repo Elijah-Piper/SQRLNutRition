@@ -21,8 +21,24 @@ public class SquirrelServiceImpl implements SquirrelService {
     private SquirrelDao squirrelDao;
 
     @Override
-    public Squirrel createSquirrel(Squirrel sqrl) {
-        return this.squirrelDao.save(sqrl);
+    public User createSquirrel(Squirrel sqrl, String username) {
+        // Adds a squirrel to a user's squirrel list and returns the user
+        Configuration cfg = new Configuration();
+        cfg.configure("hibernate.cfg.xml");
+        SessionFactory factory = cfg.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction t = session.beginTransaction();
+
+        User user = session.get(User.class, username);
+
+        user.addSquirrel(sqrl);
+
+        t.commit();
+
+        session.close();
+        factory.close();
+
+        return user;
     }
 
     @Override
@@ -31,14 +47,14 @@ public class SquirrelServiceImpl implements SquirrelService {
     }
 
     @Override
-    public List<Squirrel> getSquirrelsByUser(User user) {
+    public List<Squirrel> getSquirrelsByUsername(String username) {
         Configuration cfg = new Configuration();
         cfg.configure("hibernate.cfg.xml");
         SessionFactory factory = cfg.buildSessionFactory();
         Session session = factory.openSession();
 
-        Query q = session.createQuery("from Squirrel where user=:u");
-        q.setParameter("u", user);
+        Query q = session.createQuery("from Squirrel where username_fk=:u");
+        q.setParameter("u", username);
 
         List<Squirrel> list = q.list();
 
@@ -59,6 +75,11 @@ public class SquirrelServiceImpl implements SquirrelService {
         }
 
         return sqrl;
+    }
+
+    @Override
+    public List<Squirrel> getAllSquirrels() {
+        return this.squirrelDao.findAll();
     }
 
     @Override

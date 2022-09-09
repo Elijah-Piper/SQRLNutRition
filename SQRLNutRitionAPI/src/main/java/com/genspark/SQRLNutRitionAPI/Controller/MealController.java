@@ -16,9 +16,9 @@ public class MealController {
     @Autowired
     private MealService mealService;
 
-    @PostMapping("/create")
-    public Meal createMeal(@RequestBody Meal meal) {
-        return this.mealService.createMeal(meal);
+    @PostMapping("/create/{squirrelId}")
+    public Squirrel createMeal(@RequestBody Meal meal, @PathVariable int squirrelId) {
+        return this.mealService.createMeal(meal, squirrelId);
     }
 
     @GetMapping("/getbyid/{id}")
@@ -26,7 +26,7 @@ public class MealController {
         return this.mealService.getMealById(id);
     }
 
-    @GetMapping("/getmealsbysquirrel")
+    @GetMapping("/getbysquirrel")
     public List<Meal> getMealsBySquirrel(@RequestBody Squirrel sqrl) {
         return this.mealService.getMealsBySquirrel(sqrl);
     }
@@ -36,12 +36,12 @@ public class MealController {
         return this.mealService.updateMeal(meal);
     }
 
-    @DeleteMapping("/deletemealbyid{id}")
+    @DeleteMapping("/deletebyid{id}")
     public String deleteMealById(@PathVariable int id) {
         return this.mealService.deleteMealById(id);
     }
 
-    @DeleteMapping("/deletemealsbysquirrel")
+    @DeleteMapping("/deletebysquirrel")
     public String deleteMealsBySquirrel(@RequestBody Squirrel sqrl) {
         return this.mealService.deleteMealsBySquirrel(sqrl);
     }

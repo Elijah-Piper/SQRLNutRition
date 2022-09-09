@@ -16,9 +16,9 @@ public class SquirrelController {
     @Autowired
     private SquirrelService squirrelService;
 
-    @PostMapping("/create")
-    public Squirrel createSquirrel(@RequestBody Squirrel sqrl) {
-        return this.squirrelService.createSquirrel(sqrl);
+    @PostMapping("/create/{username}")
+    public User createSquirrel(@RequestBody Squirrel sqrl, @PathVariable String username) {
+        return this.squirrelService.createSquirrel(sqrl, username);
     }
 
     @GetMapping("/getbyid/{id}")
@@ -26,9 +26,9 @@ public class SquirrelController {
         return this.squirrelService.getSquirrelById(id);
     }
 
-    @GetMapping("/getbyuser")
-    public List<Squirrel> getSquirrelsByUser(@RequestBody User user) {
-        return this.squirrelService.getSquirrelsByUser(user);
+    @GetMapping("/getbyusername/{username}")
+    public List<Squirrel> getSquirrelsByUsername(@PathVariable String username) {
+        return this.squirrelService.getSquirrelsByUsername(username);
     }
 
     @PutMapping("/update")
@@ -36,12 +36,12 @@ public class SquirrelController {
         return this.squirrelService.updateSquirrel(sqrl);
     }
 
-    @DeleteMapping("/deletesquirrelbyid/{id}")
+    @DeleteMapping("/deletebyid/{id}")
     public String deleteSquirrelById(@PathVariable int id) {
         return this.squirrelService.deleteSquirrelById(id);
     }
 
-    @DeleteMapping("/deletesquirrelsbyuser")
+    @DeleteMapping("/deletebyuser")
     public String deleteSquirrelsByUser(@RequestBody User user) {
         return this.squirrelService.deleteSquirrelsByUser(user);
     }

@@ -1,7 +1,10 @@
 package com.genspark.SQRLNutRitionAPI.Entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,18 +16,19 @@ public class User {
 
 //    private String password; *** TO BE REVISED UPON SECURITY ENCRYPTION METHOD DETERMINATION ***
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Squirrel.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "username_fk", referencedColumnName = "username")
     private List<Squirrel> squirrels;
 
     private LocalDateTime createdOn;
 
-    public User(String username, List<Squirrel> squirrels) {
-        this.username = username;
-        this.squirrels = squirrels;
+    public User() {
         this.createdOn = LocalDateTime.now();
+        this.squirrels = new ArrayList<Squirrel>();
     }
 
-    public User() {
+    public void addSquirrel(Squirrel squirrel) {
+        this.squirrels.add(squirrel);
     }
 
     public String getUsername() {

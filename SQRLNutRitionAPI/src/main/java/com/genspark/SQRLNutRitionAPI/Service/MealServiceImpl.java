@@ -3,6 +3,7 @@ package com.genspark.SQRLNutRitionAPI.Service;
 import com.genspark.SQRLNutRitionAPI.Dao.MealDao;
 import com.genspark.SQRLNutRitionAPI.Entity.Meal;
 import com.genspark.SQRLNutRitionAPI.Entity.Squirrel;
+import com.genspark.SQRLNutRitionAPI.Entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -21,8 +22,24 @@ public class MealServiceImpl implements MealService {
     private MealDao mealDao;
 
     @Override
-    public Meal createMeal(Meal meal) {
-        return this.mealDao.save(meal);
+    public Squirrel createMeal(Meal meal, int squirrelId) {
+        // Adds a meal to a squirrel's meal list and returns the squirrel
+        Configuration cfg = new Configuration();
+        cfg.configure("hibernate.cfg.xml");
+        SessionFactory factory = cfg.buildSessionFactory();
+        Session session = factory.openSession();
+        Transaction t = session.beginTransaction();
+
+        Squirrel sqrl = session.get(Squirrel.class, squirrelId);
+
+        sqrl.addMeal(meal);
+
+        t.commit();
+
+        session.close();
+        factory.close();
+
+        return sqrl;
     }
 
     @Override
