@@ -13,7 +13,7 @@ const navStyle ={
         <Link style={navStyle} to="/">
           <li> Home </li>
         </Link>
-        <Link style={navStyle} to="/Page2">
+        <Link style={navStyle} to="/login">
           <li> Login </li>
         </Link>
         <Link style={navStyle} to="/Page3">
