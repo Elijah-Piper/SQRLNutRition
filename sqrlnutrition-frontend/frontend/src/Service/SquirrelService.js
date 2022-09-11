@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const SQUIRREL_API_URL = "http://localhost:8080/squirrel"
 
 class SquirrelService {
@@ -38,4 +37,4 @@ class SquirrelService {
     }
 }
 
-export default new SquirrelService;
+export default new SquirrelService();

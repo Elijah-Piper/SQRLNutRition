@@ -38,4 +38,4 @@ class MealService {
     }
 }
 
-export default new MealService;
+export default new MealService();
