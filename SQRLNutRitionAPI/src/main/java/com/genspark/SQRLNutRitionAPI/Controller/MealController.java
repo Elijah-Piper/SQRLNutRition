@@ -36,7 +36,7 @@ public class MealController {
         return this.mealService.updateMeal(meal);
     }
 
-    @DeleteMapping("/deletebyid{id}")
+    @DeleteMapping("/deletebyid/{id}")
     public String deleteMealById(@PathVariable int id) {
         return this.mealService.deleteMealById(id);
     }
