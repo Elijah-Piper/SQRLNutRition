@@ -1,6 +1,7 @@
 package com.genspark.SQRLNutRitionAPI.Service;
 
 import com.genspark.SQRLNutRitionAPI.Entity.User;
+import com.genspark.SQRLNutRitionAPI.UserConf.Registration.Dto;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface UserService {
 
     // DELETE
     String deleteUserByUsername(String username);
+    User registerNewUserAccount(Dto dto);
 }

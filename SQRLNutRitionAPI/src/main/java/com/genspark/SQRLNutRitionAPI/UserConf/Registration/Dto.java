@@ -1,7 +1,11 @@
 package com.genspark.SQRLNutRitionAPI.UserConf.Registration;
 
-import com.sun.istack.NotNull;
+import com.genspark.SQRLNutRitionAPI.UserConf.Authentication.PasswordMatches;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+
+@PasswordMatches
 public class Dto    {
 /*
 *   This class will be used to handle transferring the bare minimum data
