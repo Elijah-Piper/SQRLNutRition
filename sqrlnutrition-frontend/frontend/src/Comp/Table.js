@@ -3,9 +3,6 @@ import '../App.css';
 const data = [
   {squirrels: ["Nuts", "Susan", "Fluffy"]}//these will be objects, not strings
 ]
-const meals = [
-  {mealname: "acorns", protein: 4, carbs: 2, fats: 1, cals: 43}//these will be filled with object values
-]
 const i = 0;
 function Table() {
   return (
@@ -33,14 +30,14 @@ function Table() {
         </thead>
         <tbody>
           {
-            meals.map((value, key) => {
+            meals.map((element, index) => {
               return (
-                <tr key={key}>
-                  <td>{value.mealname}</td>
-                  <td>{value.protein}</td>
-                  <td>{value.carbs}</td>
-                  <td>{value.fats}</td>
-                  <td>{value.cals}</td>
+                <tr index={index}>
+                  <td>{element.mealname}</td>
+                  <td>{element.protein}</td>
+                  <td>{element.carbs}</td>
+                  <td>{element.fats}</td>
+                  <td>{element.cals}</td>
                 </tr>
               )
             })
