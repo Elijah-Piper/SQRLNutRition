@@ -41,8 +41,8 @@ public class SquirrelController {
         return this.squirrelService.deleteSquirrelById(id);
     }
 
-    @DeleteMapping("/deletebyuser")
-    public String deleteSquirrelsByUser(@RequestBody User user) {
-        return this.squirrelService.deleteSquirrelsByUser(user);
+    @DeleteMapping("/deletebyusername")
+    public String deleteSquirrelsByUsername(@PathVariable String username) {
+        return this.squirrelService.deleteSquirrelsByUsername(username);
     }
 }

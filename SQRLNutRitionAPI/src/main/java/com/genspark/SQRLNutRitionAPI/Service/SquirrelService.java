@@ -17,6 +17,6 @@ public interface SquirrelService {
     List<Squirrel> getAllSquirrels();
 
     // DELETE
-    String deleteSquirrelsByUser(User user); // Deletes all squirrels for given user
+    String deleteSquirrelsByUsername(String username); // Deletes all squirrels for given user
     String deleteSquirrelById(int id);
 }

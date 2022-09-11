@@ -83,15 +83,15 @@ public class SquirrelServiceImpl implements SquirrelService {
     }
 
     @Override
-    public String deleteSquirrelsByUser(User user) {
+    public String deleteSquirrelsByUsername(String username) {
         Configuration cfg = new Configuration();
         cfg.configure("hibernate.cfg.xml");
         SessionFactory factory = cfg.buildSessionFactory();
         Session session = factory.openSession();
         Transaction t = session.beginTransaction();
 
-        Query q = session.createQuery("delete Squirrel where user:=u");
-        q.setParameter("u", user);
+        Query q = session.createQuery("delete Squirrel where username_fk:=u");
+        q.setParameter("u", username);
         int status = q.executeUpdate();
 
         t.commit();

@@ -1,5 +1,6 @@
 package com.genspark.SQRLNutRitionAPI.Service;
 
+import com.genspark.SQRLNutRitionAPI.Dao.UserDao;
 import com.genspark.SQRLNutRitionAPI.Entity.Meal;
 import com.genspark.SQRLNutRitionAPI.Entity.Squirrel;
 import com.genspark.SQRLNutRitionAPI.Entity.User;
@@ -7,6 +8,7 @@ import com.genspark.SQRLNutRitionAPI.SqrlNutRitionApiApplication;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -31,13 +33,16 @@ import static org.junit.jupiter.api.Assertions.*;
 //@RunWith(SpringRunner.class)
 @DataJpaTest(includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {Service.class, Repository.class}))
 //@AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
-//@ActiveProfiles("test")
+@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+@ActiveProfiles("test")
 class SquirrelServiceImplTest {
 
     @Autowired
     private SquirrelService squirrelService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserDao userDao;
 
     @Test
     void shouldGetSquirrelsByUsername() {
@@ -47,13 +52,13 @@ class SquirrelServiceImplTest {
         Squirrel sqrl2 = new Squirrel();
         sqrl2.setName("McNutty");
 
-        User user = new User();
-        user.setUsername("user123");
-        user.addSquirrel(sqrl1);
-        user.addSquirrel(sqrl2);
-        userService.createUser(user);
+        User testUser = new User();
+        testUser.setUsername("user123");
+        userService.createUser(testUser);
+        squirrelService.createSquirrel(sqrl1, "user123");
+        squirrelService.createSquirrel(sqrl2, "user123");
 
-        List<Squirrel> found = squirrelService.getSquirrelsByUsername("testUsername");
+        List<Squirrel> found = squirrelService.getSquirrelsByUsername("user123");
 
         assert(found.contains(sqrl1) && found.contains(sqrl2));
     }

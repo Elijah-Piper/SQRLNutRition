@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "user_table") // USER is a reserved keyword in H2 database (used for integration testing)
 public class User {
 
     @Id
