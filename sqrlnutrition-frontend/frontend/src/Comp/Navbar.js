@@ -16,7 +16,7 @@ const navStyle ={
         <Link style={navStyle} to="/login">
           <li> Login </li>
         </Link>
-        <Link style={navStyle} to="/Page3">
+        <Link style={navStyle} to="/sqrls">
           <li> Your Table </li>
         </Link>
       </ul>
