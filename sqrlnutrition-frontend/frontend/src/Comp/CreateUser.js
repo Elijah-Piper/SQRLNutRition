@@ -23,9 +23,9 @@ function CreateU() {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
-    // UseServ.createUser({
-    //     "username": user
-    // })
+    UseServ.createUser({
+        "username": user
+    })
     console.log(" Username" + user)
     setSucc(true)
 }

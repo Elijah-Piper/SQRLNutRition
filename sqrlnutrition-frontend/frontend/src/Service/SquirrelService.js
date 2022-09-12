@@ -11,7 +11,7 @@ class SquirrelService {
 
     getSquirrelsByUsername(username) {
         // Returns a list of all squirrels belonging the the User whose username string is given
-        return axios.get(SQUIRREL_API_URL + "/getbyusername" + username);
+        return axios.get(SQUIRREL_API_URL + "/getbyusername/" + username);
     }
 
     // CREATE / UPDATE

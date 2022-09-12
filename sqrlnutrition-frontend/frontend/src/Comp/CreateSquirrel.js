@@ -22,9 +22,10 @@ function CreateS() {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
-    SqrlServ.createSquirrelsForUser( this.props.user,{
+    SqrlServ.createSquirrelsForUser( "user123",{
         "name": sqrl
     })
+    
     setSucc(true)
 }
     return (

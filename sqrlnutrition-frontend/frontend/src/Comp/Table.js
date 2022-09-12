@@ -7,6 +7,7 @@ import UserService from '../Service/UserService.js'
 class Table extends React.Component{
 
   constructor(props) {
+    console.log("Constructor ran");
     super(props);
     this.state={
       squirrels:[]
@@ -14,27 +15,41 @@ class Table extends React.Component{
   }
 
   componentDidMount() {
-    SquirrelService.getSquirrelsByUsername("Sbeve").then((Response) => {
+    console.log("Component Mounted Response:");
+    SquirrelService.getSquirrelsByUsername("user123").then((Response) => {
+      console.log(Response);
       this.setState({ squirrels: Response.data})
     })
   }
 
   render(){
+
+    console.log("Render State: ");
+    console.log(this.state);
     return(
       <div>
-        <table>
-          <thead>
-            <tr><td>Name</td></tr>
-          </thead>
-          <tbody>
-            {
-              this.state.squirrels.map(squirrel =>
-                <tr key= {squirrel.squirrelId}>
-                  <td>{squirrel.name}</td>
-                </tr>)
-            }
-          </tbody>
-        </table>
+          <h2 className="text-center">REST Extracted List</h2>
+          <table className="table table-striped">
+              <thead>
+                  <tr>
+                      <td> Squirrel Id</td>
+                      <td> Squirrel Name</td>
+                      <td> Date Created</td>
+                  </tr>
+              </thead>
+              <tbody>
+                  {
+                      this.state.squirrels.map(
+                          sqrl => 
+                          <tr key= { sqrl.squirrelId }>
+                              <td> { sqrl.squirrelId }</td>
+                              <td> { sqrl.name }</td>
+                              <td> { sqrl.createdOn }</td>
+                          </tr>
+                      )
+                  }
+              </tbody>
+          </table>
       </div>
     )
   }
