@@ -16,7 +16,7 @@ class Table extends React.Component{
 
   componentDidMount() {
     console.log("Component Mounted Response:");
-    SquirrelService.getSquirrelsByUsername("user123").then((Response) => {
+    SquirrelService.getSquirrelsByUsername("JonathanJoestar").then((Response) => {
       console.log(Response);
       this.setState({ squirrels: Response.data})
     })

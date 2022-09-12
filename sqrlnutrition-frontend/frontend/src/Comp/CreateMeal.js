@@ -47,6 +47,10 @@ function CreateM() {
         <input type="text" id="meal" ref={mealRef} autoComplete="off" onChange={(e) => setMeal(e.target.value)} value={meal} required/>
         <label htmlFor="prot"> Protein: </label>
         <input type="number" id="prot" ref={mealRef} autoComplete="off" onChange={(e) => setProt(e.target.value)} value={prot} required/>
+        <label htmlFor="carbs"> Carbs: </label>
+        <input type="number" id="carbs" ref={mealRef} autoComplete="off" onChange={(e) => setCarbs(e.target.value)} value={carbs} required/>
+        <label htmlFor="fats"> Fats: </label>
+        <input type="number" id="fats" ref={mealRef} autoComplete="off" onChange={(e) => setFats(e.target.value)} value={fats} required/>
         <button>Go Nuts</button>
       </form>
     </section>
