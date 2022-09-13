@@ -1,6 +1,27 @@
 import '../App.css';
 import {useRef, useState, useEffect} from 'react';
 import UseServ from '../Service/UserService.js';
+import UserService from '../Service/UserService.js';
+
+const users = {
+  usernames: [],
+  objs: []
+};
+
+const setUsers = () => { 
+  UserService.getAllUsers().then((Response) => {
+    users.objs = Response.data;
+    users.objs.forEach((user) => {
+      users.usernames.push(user.username);
+    });
+  });
+  return new Promise((resolve) => {
+    console.log("setUsers PROMISE RESOLVED");
+    resolve();
+  });
+}
+
+setUsers();
 
 function Login() {
   const userRef = useRef();
@@ -10,32 +31,26 @@ function Login() {
   const [pass,setPass] = useState('');
   const [errMsg,setErrMsg] = useState('');
   const [succ,setSucc] = useState('');
-
-  const userlist = [UseServ.getAllUsers];
-  const usernames = [];
-
-  userlist.forEach(((element) =>{
-    usernames.push(element)
-  }));
-
- 
-
+  
   useEffect(() => {
-    userRef.current.focus();
-  }, [])
+      userRef.current.focus();
+    }, [])
 
-  useEffect(() => {
-    setErrMsg('');
-  }, [user,pass])
+    useEffect(() => {
+      setErrMsg('');
+    }, [user,pass])
 
-  const handleSubmit = async (e) => {
-  e.preventDefault();
-  if(usernames.includes(user)){
-      setSucc(true);
-  } else{
-    setErrMsg("Incorrect username");
-  }
-}
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setUsers().then(() => {
+        console.log("then");
+        if (users.usernames.includes(user)) {
+          setSucc(true);
+        } else {
+          setErrMsg("That username does not exist");
+        }
+      });
+    }
     return (
       <>
       {succ ? (
