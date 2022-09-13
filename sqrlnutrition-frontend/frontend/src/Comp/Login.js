@@ -16,7 +16,6 @@ const setUsers = () => {
     });
   });
   return new Promise((resolve) => {
-    console.log("setUsers PROMISE RESOLVED");
     resolve();
   });
 }
@@ -43,7 +42,6 @@ function Login() {
     const handleSubmit = async (e) => {
       e.preventDefault();
       setUsers().then(() => {
-        console.log("then");
         if (users.usernames.includes(user)) {
           setSucc(true);
         } else {
