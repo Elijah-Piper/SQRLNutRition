@@ -1,5 +1,6 @@
 package com.genspark.SQRLNutRitionAPI.UserConf.Authentication;
 
+import com.genspark.SQRLNutRitionAPI.Dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
@@ -20,10 +24,10 @@ import java.io.IOException;
 @Configuration
 @EnableWebSecurity
 public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
+    LogoutSuccessHandler logoutSuccessHandler = new CustomLogoutSuccessHandler();
+    DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
     @Autowired
-    LogoutSuccessHandler logoutSuccessHandler;
-    @Autowired
-    DaoAuthenticationProvider authProvider;
+    UserDao userDao;
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception{
@@ -42,23 +46,14 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(logoutSuccessHandler);
     }
-    private class CustomLogoutSuccessHandler extends
-            SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
-
-        @Override
-        public void onLogoutSuccess(
-                HttpServletRequest request,
-                HttpServletResponse response,
-                Authentication authentication)
-                throws IOException, ServletException {
-
-            String refererUrl = request.getHeader("Referer");
-
-            super.onLogoutSuccess(request, response, authentication);
-        }
-    }
     @Bean
-    public LogoutSuccessHandler logoutSuccessHandler() {
-        return new CustomLogoutSuccessHandler();
+    public PasswordEncoder passwordEncoder()    {
+        return new BCryptPasswordEncoder();
+    }
+    public DaoAuthenticationProvider authProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService((UserDetailsService) userDao);
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
     }
 }

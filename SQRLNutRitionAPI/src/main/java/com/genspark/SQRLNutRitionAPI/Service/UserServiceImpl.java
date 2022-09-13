@@ -4,9 +4,9 @@ import com.genspark.SQRLNutRitionAPI.Dao.UserDao;
 import com.genspark.SQRLNutRitionAPI.Entity.User;
 import com.genspark.SQRLNutRitionAPI.UserConf.Error.UserAlreadyExistException;
 import com.genspark.SQRLNutRitionAPI.UserConf.Registration.Dto;
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -79,17 +79,5 @@ public class UserServiceImpl implements UserService {
 //        }
 //        return userDao.save(user);
         return this.createUser(dto);
-    }
-    @Bean
-    public DaoAuthenticationProvider authProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService((UserDetailsService) userDao);
-        authProvider.setPasswordEncoder(passwordEncoder);
-        return authProvider;
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder()    {
-        return new BCryptPasswordEncoder();
     }
 }
