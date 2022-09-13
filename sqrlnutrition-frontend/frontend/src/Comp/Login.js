@@ -12,6 +12,13 @@ function Login() {
   const [succ,setSucc] = useState('');
 
   const userlist = [UseServ.getAllUsers];
+  const usernames = [];
+
+  userlist.forEach(((element) =>{
+    usernames.push(element)
+  }));
+
+ 
 
   useEffect(() => {
     userRef.current.focus();
@@ -23,7 +30,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
-  if(userlist.includes(user)){
+  if(usernames.includes(user)){
       setSucc(true);
   } else{
     setErrMsg("Incorrect username");
