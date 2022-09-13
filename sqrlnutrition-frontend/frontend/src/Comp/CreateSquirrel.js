@@ -5,6 +5,7 @@ import SqrlServ from '../Service/SquirrelService.js';
 function CreateS() {
   const sqrlRef = useRef();
   const errRef = useRef();
+  const user = "JonathanJoestar";
 
   const [sqrl,setSqrl] = useState('');
   const [errMsg,setErrMsg] = useState('');
@@ -22,10 +23,10 @@ function CreateS() {
 
   const handleSubmit = async (e) => {
   e.preventDefault();
-    SqrlServ.createSquirrelsForUser( "user123",{
+    SqrlServ.createSquirrelsForUser( user,{
         "name": sqrl
     })
-    
+    console.log(sqrl);
     setSucc(true)
 }
     return (

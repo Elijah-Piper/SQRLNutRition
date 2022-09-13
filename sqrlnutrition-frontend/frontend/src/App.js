@@ -5,6 +5,7 @@ import Navbar from './Comp/Navbar.js';
 import CreateUser from './Comp/CreateUser.js';
 import SqrlMaker from './Comp/CreateSquirrel.js';
 import MealMake from './Comp/CreateMeal.js';
+import sqrl1 from './Res/Img/sqrl1.jpg';
 import './App.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
@@ -12,7 +13,7 @@ function App() {
   return (
     <Router>
       <Navbar />
-    <div className="App">
+    <div className="App" style={{backgroundImage: `url(${sqrl1})` }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
