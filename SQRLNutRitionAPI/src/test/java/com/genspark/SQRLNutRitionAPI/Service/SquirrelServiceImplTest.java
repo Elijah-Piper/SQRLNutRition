@@ -5,6 +5,7 @@ import com.genspark.SQRLNutRitionAPI.Entity.Meal;
 import com.genspark.SQRLNutRitionAPI.Entity.Squirrel;
 import com.genspark.SQRLNutRitionAPI.Entity.User;
 import com.genspark.SQRLNutRitionAPI.SqrlNutRitionApiApplication;
+import com.genspark.SQRLNutRitionAPI.UserConf.Registration.Dto;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,7 @@ class SquirrelServiceImplTest {
         Squirrel sqrl2 = new Squirrel();
         sqrl2.setName("McNutty");
 
-        User testUser = new User();
+        Dto testUser = new Dto();
         testUser.setUsername("user123");
         userService.createUser(testUser);
         squirrelService.createSquirrel(sqrl1, "user123");

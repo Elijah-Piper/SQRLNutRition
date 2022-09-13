@@ -6,11 +6,14 @@ import com.genspark.SQRLNutRitionAPI.UserConf.Error.UserAlreadyExistException;
 import com.genspark.SQRLNutRitionAPI.UserConf.Registration.Dto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +27,15 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public User createUser(User user) {
+    public User createUser(Dto dto) throws UserAlreadyExistException {
+        User user = new User(dto);
+        try {
+            getUserByUsername(dto.getUsername());
+            throw new UserAlreadyExistException("There is an account with that username: " + dto.getUsername());
+        } catch (RuntimeException ex)    {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            this.userDao.save(user);
+        }
         return this.userDao.save(user);
     }
 
@@ -58,15 +69,16 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public User registerNewUserAccount(Dto dto) throws UserAlreadyExistException {
-        User user = new User(dto);
-        try {
-            getUserByUsername(dto.getUsername());
-            throw new UserAlreadyExistException("There is an account with that username: " + dto.getUsername());
-       } catch (RuntimeException ex)    {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            createUser(user);
-        }
-        return userDao.save(user);
+//        User user = new User(dto);
+//        try {
+//            getUserByUsername(dto.getUsername());
+//            throw new UserAlreadyExistException("There is an account with that username: " + dto.getUsername());
+//       } catch (RuntimeException ex)    {
+//            user.setPassword(passwordEncoder.encode(user.getPassword()));
+//            createUser(user);
+//        }
+//        return userDao.save(user);
+        return this.createUser(dto);
     }
     @Bean
     public DaoAuthenticationProvider authProvider() {
@@ -74,5 +86,10 @@ public class UserServiceImpl implements UserService {
         authProvider.setUserDetailsService((UserDetailsService) userDao);
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder()    {
+        return new BCryptPasswordEncoder();
     }
 }

@@ -24,9 +24,12 @@ function CreateU() {
   const handleSubmit = async (e) => {
   e.preventDefault();
     UseServ.createUser({
-        "username": user
+        "username": user,
+		"passfield1": pass,
+		"passfield2": pass
     })
     console.log(" Username" + user)
+    console.log(" Password" + pass)
     setSucc(true)
 }
     return (
@@ -37,7 +40,7 @@ function CreateU() {
         </section>
       ) : (
 
-      
+
     <section>
       <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> {errMsg}</p>
       <h1> Please Register</h1>
@@ -53,5 +56,5 @@ function CreateU() {
     </>
     );
   }
-  
+
   export default CreateU;

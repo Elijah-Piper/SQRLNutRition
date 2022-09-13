@@ -3,7 +3,7 @@ package com.genspark.SQRLNutRitionAPI.Entity;
 import com.genspark.SQRLNutRitionAPI.UserConf.Registration.Dto;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.management.relation.Role;
+//import javax.management.relation.Role;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,9 +19,9 @@ public class User {
     private String username;
 
     private String password; //*** TO BE REVISED UPON SECURITY ENCRYPTION METHOD DETERMINATION ***
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+ //   @ManyToMany(fetch = FetchType.EAGER)
+ //   @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+ //   private Collection<Role> roles;
     @OneToMany(fetch = FetchType.EAGER, targetEntity = Squirrel.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "username_fk", referencedColumnName = "username")
     private List<Squirrel> squirrels;
@@ -58,13 +58,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public Collection<Role> getRoles() {
-        return roles;
-    }
+//   public Collection<Role> getRoles() {
+//       return roles;
+//   }
 
-    public void setRoles(final Collection<Role> roles) {
-        this.roles = roles;
-    }
+//   public void setRoles(final Collection<Role> roles) {
+//       this.roles = roles;
+//   }
     public List<Squirrel> getSquirrels() {
         return squirrels;
     }

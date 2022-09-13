@@ -2,6 +2,7 @@ package com.genspark.SQRLNutRitionAPI.Controller;
 
 import com.genspark.SQRLNutRitionAPI.Entity.User;
 import com.genspark.SQRLNutRitionAPI.Service.UserService;
+import com.genspark.SQRLNutRitionAPI.UserConf.Registration.Dto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/create")
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody Dto user) {
         return this.userService.createUser(user);
     }
 
