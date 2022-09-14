@@ -49,7 +49,9 @@ function CreateU() {
         <input type="text" id="username" ref={userRef} autoComplete="off" onChange={(e) => setUser(e.target.value)} value={user} required/>
         <label htmlFor="password"> Password:</label>
         <input type="password" id="password"  autoComplete="off" onChange={(e) => setPass(e.target.value)} value={pass} required/>
+        <p>
         <button>Register</button>
+        </p>
       </form>
     </section>
     )}

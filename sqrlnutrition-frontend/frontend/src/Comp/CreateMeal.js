@@ -51,7 +51,9 @@ function CreateM() {
         <input type="number" id="carbs" ref={mealRef} autoComplete="off" onChange={(e) => setCarbs(e.target.value)} value={carbs} required/>
         <label htmlFor="fats"> Fats: </label>
         <input type="number" id="fats" ref={mealRef} autoComplete="off" onChange={(e) => setFats(e.target.value)} value={fats} required/>
+        <p>
         <button>Go Nuts</button>
+        </p>
       </form>
     </section>
     )}

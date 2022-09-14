@@ -44,7 +44,9 @@ function CreateS() {
       <form onSubmit={handleSubmit}>
         <label htmlFor="squirrelname"> Squirrel Name:</label>
         <input type="text" id="squirrelname" ref={sqrlRef} autoComplete="off" onChange={(e) => setSqrl(e.target.value)} value={sqrl} required/>
+        <p>
         <button>Go Nuts</button>
+        </p>
       </form>
     </section>
     )}
