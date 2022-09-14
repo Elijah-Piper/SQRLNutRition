@@ -34,7 +34,7 @@ class Table extends React.Component{
                           sqrl =>
                           <div key={ sqrl.squirrelId } className="squirrel-table">
                             <h2 className="text-center"> Name: { sqrl.name }</h2>
-                            <table className="table table-striped">
+                            <table >
                                 <thead>
                                     <tr>
                                         <td> Meal Name </td>

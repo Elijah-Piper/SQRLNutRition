@@ -76,11 +76,13 @@ function Login() {
       <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> {errMsg}</p>
       <h1> Please Sign In</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username"> Username:</label>
+        <label htmlFor="username"> Username</label>
         <input type="text" id="username" ref={userRef} autoComplete="off" onChange={(e) => setUser(e.target.value)} value={user} required/>
-        <label htmlFor="password"> Password:</label>
+        <label htmlFor="password"> Password</label>
         <input type="password" id="password"  autoComplete="off" onChange={(e) => setPass(e.target.value)} value={pass} required/>
+        <p>
         <button>Sign In</button>
+        </p>
       </form>
     </section>
     )}
