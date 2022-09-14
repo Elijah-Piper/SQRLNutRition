@@ -7,6 +7,7 @@ function Admin()	{
 		display:"flex"
 	}
 	var name = localStorage.getItem("signedInUsername");
+	name = name ? name : "logged out";
 	return (
 		<div>
 			<header>
