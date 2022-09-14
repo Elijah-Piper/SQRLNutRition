@@ -80,4 +80,9 @@ public class UserServiceImpl implements UserService {
 //        return userDao.save(user);
         return this.createUser(dto);
     }
+
+    @Override
+    public String encodePassword(String pw) {
+        return passwordEncoder.encode(pw);
+    }
 }

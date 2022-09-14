@@ -41,4 +41,9 @@ public class UserController {
     public String deleteUserByUsername(@PathVariable String username) {
         return this.userService.deleteUserByUsername(username);
     }
+
+    @GetMapping("/encode/{pw}")
+    public String encodePassword(@PathVariable String pw) {
+        return this.userService.encodePassword(pw);
+    }
 }

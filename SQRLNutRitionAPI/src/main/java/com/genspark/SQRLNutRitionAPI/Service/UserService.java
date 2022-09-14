@@ -17,5 +17,8 @@ public interface UserService {
 
     // DELETE
     String deleteUserByUsername(String username);
+
     User registerNewUserAccount(Dto dto);
+
+    String encodePassword(String pw);
 }
