@@ -68,7 +68,7 @@ function Login() {
       {succ ? (
         <section>
 		  <script>
-		    setTimeout(function(){window.location.href = '/'}, 50000);
+		    setTimeout(function(){window.location.href = '/'}, 5000);
 		  </script>
           <h1> You logged in successfully</h1>
         </section>
