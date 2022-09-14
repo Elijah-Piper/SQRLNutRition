@@ -44,6 +44,9 @@ function Navbar() {
         <h3 style={navStyle}>
           { user ? "Hello, " + user : "Please login or create an account" }
         </h3>
+        { user === "admin" ? <Link style={navStyle} to="/admin">
+		  <li> Admin Page </li> 
+		</Link> : '' }
       </ul>
     </nav>
   );
