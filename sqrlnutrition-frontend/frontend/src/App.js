@@ -20,8 +20,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/sqrls" element={<Table />} />
           <Route path="/createuser" element={<CreateUser />} />
-          <Route path="/sqrlmake" element={<SqrlMaker/>} />
-          <Route path="/createmeal" element={<MealMake/>} />
+          <Route path="/sqrlmake/:username" element={<SqrlMaker />} />
+          <Route path="/createmeal/:sqrlid" element={<MealMake/>} />
 	      <Route path="/admin" element={<Admin />} />
         </Routes>
     </div>

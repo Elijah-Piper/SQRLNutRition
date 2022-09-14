@@ -1,11 +1,13 @@
 import '../App.css';
+import { useParams } from 'react-router-dom'
 import {useRef, useState, useEffect} from 'react';
 import SqrlServ from '../Service/SquirrelService.js';
 
-function CreateS() {
+function CreateS(props) {
+  const {username} = useParams();
+
   const sqrlRef = useRef();
   const errRef = useRef();
-  const user = "JonathanJoestar";
 
   const [sqrl,setSqrl] = useState('');
   const [errMsg,setErrMsg] = useState('');
@@ -22,11 +24,10 @@ function CreateS() {
   }, [sqrl])
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-    SqrlServ.createSquirrelsForUser( user,{
+    e.preventDefault();
+    SqrlServ.createSquirrelsForUser( username,{
         "name": sqrl
     })
-    console.log(sqrl);
     setSucc(true)
 }
     return (
@@ -37,21 +38,19 @@ function CreateS() {
         </section>
       ) : (
 
-
+      
     <section>
       <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> {errMsg}</p>
       <h1> Enter Squirrel Name</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="squirrelname"> Squirrel Name:</label>
         <input type="text" id="squirrelname" ref={sqrlRef} autoComplete="off" onChange={(e) => setSqrl(e.target.value)} value={sqrl} required/>
-        <p>
         <button>Go Nuts</button>
-        </p>
       </form>
     </section>
     )}
     </>
-  );
-}
-
+    );
+  }
+  
   export default CreateS;

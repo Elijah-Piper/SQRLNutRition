@@ -37,8 +37,10 @@ function Navbar() {
           <li> Home </li>
         </Link>
 	    { user ? <Link style={navStyle} to="/sqrls">
-          <li> Your Table </li>
-        </Link> : '' }
+          <li> Your Squirrels </li>
+        </Link> : 
+        <Link style={navStyle} to="/createUser">Create Account</Link>
+        }
 	    { user ? '' : <LoginLink/> }
 	    { user ? <LogoutLink/> :  ''}
         <h3 style={navStyle}>
