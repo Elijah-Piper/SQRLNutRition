@@ -83,6 +83,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean checkPassword(String username, String pw) {
-        return passwordEncoder.matches(getUserByUsername(username).getPassword(), pw);
+        return passwordEncoder.matches(pw, getUserByUsername(username).getPassword());
     }
 }
