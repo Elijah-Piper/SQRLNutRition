@@ -20,5 +20,5 @@ public interface UserService {
 
     User registerNewUserAccount(Dto dto);
 
-    String encodePassword(String pw);
+    boolean checkPassword(String username, String pw);
 }

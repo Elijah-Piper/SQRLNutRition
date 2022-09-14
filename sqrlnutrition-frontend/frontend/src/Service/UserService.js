@@ -30,6 +30,11 @@ class UserService {
     deleteUserByUsername(username) {
         return axios.delete(USER_API_URL + "/deletebyusername/" + username);
     }
+
+    // Compares entered password to stored password for given username's user
+    checkPassword(username, pw) {
+        return axios.get(USER_API_URL + "/checkpassword/" + username + "/" + pw)
+    }
 }
 
 export default new UserService();
