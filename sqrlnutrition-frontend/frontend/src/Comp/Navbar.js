@@ -2,8 +2,6 @@ import '../App.css';
 import {Link} from 'react-router-dom';
 import { useEffect } from 'react';
 
-function Navbar() {
-
   const navStyle ={
     color: "white"
 
@@ -11,6 +9,7 @@ function Navbar() {
 
   const clearUser = () => {
     localStorage.removeItem("signedInUsername");
+    window.location.reload();
   }
 
   function LoginLink() {
@@ -22,25 +21,28 @@ function Navbar() {
   }
   function LogoutLink() {
     return (
-      <Link style={navStyle} to="/" onClick={ clearUser() }>
+      <Link style={navStyle} to="/" onClick={() => clearUser() }>
         <li> Logout </li>
       </Link>
     );
   }
 
+function Navbar() {
+
+  var user = localStorage.getItem("signedInUsername");
   return (
     <nav>
       <ul className="nav-links">
         <Link style={navStyle} to="/">
           <li> Home </li>
         </Link>
-        <Link style={navStyle} to="/sqrls">
+	    { user ? <Link style={navStyle} to="/sqrls">
           <li> Your Table </li>
-        </Link>
-        <LoginLink/>
-        <LogoutLink/>
+        </Link> : '' }
+	    { user ? '' : <LoginLink/> }
+	    { user ? <LogoutLink/> :  ''}
         <h3 style={navStyle}>
-          { localStorage.getItem("signedInUsername") ? "Hello, " + localStorage.getItem("signedInUsername") : "Please login or create an account" }
+          { user ? "Hello, " + user : "Please login or create an account" }
         </h3>
       </ul>
     </nav>
