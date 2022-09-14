@@ -38,7 +38,7 @@ function CreateM() {
         </section>
       ) : (
 
-      
+
     <section>
       <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> {errMsg}</p>
       <h1> Enter Meal Details</h1>
@@ -56,7 +56,7 @@ function CreateM() {
     </section>
     )}
     </>
-    );
-  }
-  
+  );
+}
+
   export default CreateM;

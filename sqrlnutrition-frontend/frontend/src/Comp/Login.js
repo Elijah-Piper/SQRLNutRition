@@ -7,7 +7,7 @@ const users = {
   objs: [],
 };
 
-const setUsers = () => { 
+const setUsers = () => {
   UserService.getAllUsers().then((Response) => {
     users.objs = Response.data;
     users.objs.forEach((user) => {
@@ -29,7 +29,7 @@ function Login() {
   const [pass,setPass] = useState('');
   const [errMsg,setErrMsg] = useState('');
   const [succ,setSucc] = useState('');
-  
+
   useEffect(() => {
       userRef.current.focus();
     }, [])
@@ -48,7 +48,7 @@ function Login() {
         if (users.usernames.includes(user)) { // Checks that username exists in DB
 
           passwordValid = Response.data;
-          
+
           console.log("passwordValid:");
           console.log(passwordValid);
           if (passwordValid) { // Checks password
@@ -71,7 +71,7 @@ function Login() {
         </section>
       ) : (
 
-      
+
     <section>
       <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> {errMsg}</p>
       <h1> Please Sign In</h1>
@@ -85,7 +85,7 @@ function Login() {
     </section>
     )}
     </>
-    );
-  }
-  
+  );
+}
+
   export default Login;

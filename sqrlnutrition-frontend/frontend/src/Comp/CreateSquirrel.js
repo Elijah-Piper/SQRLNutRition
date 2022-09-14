@@ -37,7 +37,7 @@ function CreateS() {
         </section>
       ) : (
 
-      
+
     <section>
       <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive"> {errMsg}</p>
       <h1> Enter Squirrel Name</h1>
@@ -49,7 +49,7 @@ function CreateS() {
     </section>
     )}
     </>
-    );
-  }
-  
+  );
+}
+
   export default CreateS;

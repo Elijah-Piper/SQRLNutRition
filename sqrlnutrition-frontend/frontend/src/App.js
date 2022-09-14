@@ -1,3 +1,4 @@
+import Admin from './Comp/Admin.js';
 import Table from './Comp/Table.js';
 import Home from './Comp/Home.js';
 import Login from './Comp/Login.js';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/createuser" element={<CreateUser />} />
           <Route path="/sqrlmake" element={<SqrlMaker/>} />
           <Route path="/createmeal" element={<MealMake/>} />
+	      <Route path="/admin" element={<Admin />} />
         </Routes>
     </div>
     </Router>

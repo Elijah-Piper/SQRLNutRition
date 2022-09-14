@@ -54,7 +54,7 @@ function CreateU() {
     </section>
     )}
     </>
-    );
-  }
+  );
+}
 
   export default CreateU;

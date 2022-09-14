@@ -6,13 +6,13 @@ function Navbar() {
 
   const navStyle ={
     color: "white"
-  
+
   };
 
   const clearUser = () => {
     localStorage.removeItem("signedInUsername");
   }
-  
+
   function LoginLink() {
     return (
       <Link style={navStyle} to="/login">
