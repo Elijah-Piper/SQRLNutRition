@@ -1,11 +1,10 @@
 import '../App.css';
 import {useRef, useState, useEffect} from 'react';
-import UseServ from '../Service/UserService.js';
 import UserService from '../Service/UserService.js';
 
 const users = {
   usernames: [],
-  objs: []
+  objs: [],
 };
 
 const setUsers = () => { 
@@ -41,14 +40,29 @@ function Login() {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      setUsers().then(() => {
-        if (users.usernames.includes(user)) {
-          setSucc(true);
+
+      let passwordValid = null;
+
+      setUsers().then(() => UserService.checkPassword(user, pass).then((Response) => {
+
+        if (users.usernames.includes(user)) { // Checks that username exists in DB
+
+          passwordValid = Response.data;
+          
+          console.log("passwordValid:");
+          console.log(passwordValid);
+          if (passwordValid) { // Checks password
+            setSucc(true);
+            localStorage.setItem("signedInUsername", user);
+          } else {
+            setErrMsg("Incorrect password");
+          }
         } else {
           setErrMsg("That username does not exist");
         }
-      });
+      }));
     }
+
     return (
       <>
       {succ ? (
