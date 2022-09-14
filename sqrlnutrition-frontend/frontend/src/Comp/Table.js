@@ -4,6 +4,7 @@ import MealService from '../Service/MealService.js';
 import SquirrelService from '../Service/SquirrelService.js';
 import UserService from '../Service/UserService.js'
 
+
 class Table extends React.Component{
 
   constructor(props) {
@@ -16,7 +17,7 @@ class Table extends React.Component{
 
   componentDidMount() {
     console.log("Component Mounted Response:");
-    SquirrelService.getSquirrelsByUsername("JonathanJoestar").then((Response) => {
+    SquirrelService.getSquirrelsByUsername(localStorage.getItem("signedInUsername")).then((Response) => {
       console.log(Response);
       this.setState({ squirrels: Response.data})
     })
@@ -24,32 +25,43 @@ class Table extends React.Component{
 
   render(){
 
-    console.log("Render State: ");
-    console.log(this.state);
+    console.log(this.state.squirrels)
     return(
       <div>
-          <h2 className="text-center">REST Extracted List</h2>
-          <table className="table table-striped">
-              <thead>
-                  <tr>
-                      <td> Squirrel Id</td>
-                      <td> Squirrel Name</td>
-                      <td> Date Created</td>
-                  </tr>
-              </thead>
-              <tbody>
+          <h1 className="text-center">Your Squirrels</h1>
                   {
                       this.state.squirrels.map(
                           sqrl => 
-                          <tr key= { sqrl.squirrelId }>
-                              <td> { sqrl.squirrelId }</td>
-                              <td> { sqrl.name }</td>
-                              <td> { sqrl.createdOn }</td>
-                          </tr>
+                          <div key={ sqrl.squirrelId } className="squirrel-table">
+                            <h2 className="text-center"> Name: { sqrl.name }</h2>
+                            <table className="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td> Meal Name </td>
+                                        <td> Date and Time Eaten </td>
+                                        <td> Calories </td>
+                                        <td> Protein </td>
+                                        <td> Carbohydrates </td>
+                                        <td> Fat </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  { sqrl.meals.map( meal =>
+                                    <tr key= { meal.mealId }>
+                                      <td> { meal.name } </td>
+                                      <td> { meal.eatenOn } </td>
+                                      <td> { meal.calories } </td>
+                                      <td> { meal.protein }g </td>
+                                      <td> { meal.carbs }g </td>
+                                      <td> { meal.fat }g </td>
+                                    </tr>
+                                    )
+                                  }
+                                </tbody>
+                            </table>
+                          </div>
                       )
                   }
-              </tbody>
-          </table>
       </div>
     )
   }
